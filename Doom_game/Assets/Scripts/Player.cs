@@ -9,7 +9,8 @@ public class Player : MonoBehaviour {
     public GameObject bullet;
     public float speed;
     public float fireRate = 0.5f;
-    float timer;
+    public float nextfire = 0f;
+
 
     private void Update()
     {
@@ -17,12 +18,12 @@ public class Player : MonoBehaviour {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         float mouselistener = Input.GetAxis("Fire1");
-        timer += Time.time;
+ 
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveHorizontal,moveVertical)*speed;
-        if (Input.GetButton("Fire1") && timer > fireRate)
+        if (Input.GetButton("Fire1") && Time.time > nextfire)
         {
-            timer = 0;
+            nextfire = Time.time + fireRate;
             Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
         }
         
