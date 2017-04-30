@@ -6,7 +6,7 @@ public class SuperShotgun : Weapon
 {
     public SuperShotgun()
     {
-        Type = WeaponType.Shotgun;
+        Type = WeaponType.SuperShotgun;
         Ammo = WeaponConfig.Instance.superShotgun.ammoType;
         AmmoPerShot = WeaponConfig.Instance.superShotgun.ammoPerShot;
         MinDamage = WeaponConfig.Instance.superShotgun.minDamage;

@@ -79,8 +79,9 @@ public class Player : MonoBehaviour
         }
         Weapons[WeaponType.Pistol] = new Pistol();
         activeWeapon = Weapons[WeaponType.Pistol];
+        ///////////////////
         TestGiveAllWeapons();
-
+        ///////////////////
         if (OnStartEvent != null)
             OnStartEvent(this);
     }
@@ -107,6 +108,7 @@ public class Player : MonoBehaviour
                 SwitchWeapon(WeaponType.Pistol);
                 return;
             }
+
 
             SwitchWeapon(activeWeapon.Type + 1);
         }

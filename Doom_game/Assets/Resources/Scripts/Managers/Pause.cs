@@ -8,6 +8,7 @@ public class Pause : MonoBehaviour {
     public GameObject menu;
     public GameObject opt;
     public GameObject game;
+    //public GameObject player;
 
     void Update ()
     {
@@ -19,6 +20,7 @@ public class Pause : MonoBehaviour {
                 game.SetActive(true);
                 opt.SetActive(false);
                 menu.SetActive(false);
+                //player.SetActive(false);
             }
             else
             {
@@ -26,6 +28,7 @@ public class Pause : MonoBehaviour {
                 game.SetActive(false);
                 opt.SetActive(false);
                 menu.SetActive(true);
+                //player.SetActive(true);
             }
         }
 
