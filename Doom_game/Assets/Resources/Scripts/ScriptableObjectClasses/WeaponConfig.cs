@@ -42,4 +42,10 @@ public class WeaponConfig : ScriptableObject
 
     //weapons config
     public WeaponInfo pistol;
+    public WeaponInfo shotgun;
+    public WeaponInfo superShotgun;
+    public WeaponInfo chaingun;
+    public WeaponInfo rocket;
+    public WeaponInfo plasmagun;
+    public WeaponInfo bfg;
 }

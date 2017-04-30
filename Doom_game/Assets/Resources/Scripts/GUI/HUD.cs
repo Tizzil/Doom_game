@@ -18,11 +18,13 @@ public class HUD : MonoBehaviour
     void OnEnable()
     {
         Player.OnStartEvent += OnStart;
+        Player.OnWeaponSwitch += OnWeaponSwitch;
     }
 
     void OnDisable()
     {
         Player.OnStartEvent -= OnStart;
+        Player.OnWeaponSwitch -= OnWeaponSwitch;
     }
 
     void OnStart(Player player)
@@ -34,5 +36,10 @@ public class HUD : MonoBehaviour
         shellsText.text = player.Ammo[AmmoType.Shell].ToString();
         rocketText.text = player.Ammo[AmmoType.Rocket].ToString();
         cellsText.text = player.Ammo[AmmoType.Cell].ToString();
+    }
+
+    void OnWeaponSwitch(Weapon weapon)
+    {
+        currentWeaponImage.sprite = weapon.Sprite;
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum WeaponType
 {
-    Pistol          = 0,
-    Shotgun         = 1,
-    SuperShotgun    = 2,
-    Chaingun        = 3,
-    RocketLauncher  = 4,
-    Plasmagun       = 5,
-    BGF             = 6,
+    Pistol          = 1,
+    Shotgun         = 2,
+    SuperShotgun    = 3,
+    Chaingun        = 4,
+    RocketLauncher  = 5,
+    Plasmagun       = 6,
+    BGF             = 7,
 }
 
 public enum AmmoType

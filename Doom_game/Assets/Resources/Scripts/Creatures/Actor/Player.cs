@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     public Dictionary<WeaponType, Weapon> Weapons { get; private set; } 
 
-    Weapon active_weapon;
+    Weapon activeWeapon;
 
     float speed;
     Vector2 velocity;
@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
 
     public delegate void OnStart(Player info);
     public static event OnStart OnStartEvent;
+
+    public delegate void WeaponSwitch(Weapon weapon);
+    public static event WeaponSwitch OnWeaponSwitch;
 
     void OnEnable()
     {
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour
             Weapons[(WeaponType)i] = null;
         }
         Weapons[WeaponType.Pistol] = new Pistol();
+        TestGiveAllWeapons();
 
         if (OnStartEvent != null)
             OnStartEvent(this);
@@ -91,9 +95,38 @@ public class Player : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         velocity.Set(moveHorizontal * speed, moveVertical * speed);
         GetComponent<Rigidbody2D>().velocity = velocity;
+
+        float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+
+        for (int i = (int)WeaponType.Pistol; i <= (int)WeaponType.BGF; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha0 + i))
+            {
+                SwitchWeapon((WeaponType)i);
+            }
+        }
+    }
+
+    void SwitchWeapon(WeaponType newWeapon)
+    {
+        if (Weapons[newWeapon] != null)
+        {
+            activeWeapon = Weapons[newWeapon];
+            if (OnWeaponSwitch != null)
+                OnWeaponSwitch(activeWeapon);
+        }
     }
 
 
 
-
+    void TestGiveAllWeapons()
+    {
+        Weapons[WeaponType.Pistol] = new Pistol();
+        Weapons[WeaponType.Shotgun] = new Shotgun();
+        Weapons[WeaponType.SuperShotgun] = new SuperShotgun();
+        Weapons[WeaponType.Chaingun] = new Chaingun();
+        Weapons[WeaponType.RocketLauncher] = new RocketLauncher();
+        Weapons[WeaponType.Plasmagun] = new Plasmagun();
+        Weapons[WeaponType.BGF] = new BFG();
+    }
 }
