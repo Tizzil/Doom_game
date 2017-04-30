@@ -16,11 +16,13 @@ public class Weapon
 
     public Sprite Sprite { get; protected set; }
 
-    public virtual void Shot()
+    public virtual bool Shot()
     {
         var now = DateTime.UtcNow;
         var timeFromLastShot = now.Subtract(LastShotTS);
         if (timeFromLastShot < ShotDelay)
-            return;
+            return false;
+
+        return true;
     }
 }

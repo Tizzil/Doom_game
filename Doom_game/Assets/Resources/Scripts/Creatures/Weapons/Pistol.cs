@@ -14,10 +14,4 @@ public class Pistol : Weapon
         ShotDelay = WeaponConfig.Instance.pistol.GetShotDelay();
         Sprite = WeaponConfig.Instance.pistol.sprite;
     }
-
-    public override void Shot()
-    {
-        base.Shot();
-
-    }
 }
