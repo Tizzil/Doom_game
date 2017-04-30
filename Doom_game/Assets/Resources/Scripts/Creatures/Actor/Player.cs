@@ -21,16 +21,10 @@ public class Weapon
 */
 public class Player : MonoBehaviour
 {
-
-    public GameObject player;
     public Transform shotSpawn;
-    public GameObject bullet;
 
     public Weapon weapon;
     public Weapon active_weapon;
-
-    public float fireRate = 0.5f;
-    public float nextfire = 0f;
 
     public float PL_speed;
     public int PL_hp;
@@ -39,6 +33,8 @@ public class Player : MonoBehaviour
     public int PL_shel;
     public int PL_rckt;
     public int PL_plsm;
+
+    Vector2 velocity;
 
     public delegate void Callback();
     public static event Callback OnPlayerActivated;
@@ -58,25 +54,23 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
+        velocity = new Vector2();
     }
 
 
 
     private void Update()
     {
-        
+        PlayerControls();
+    }
+
+    void PlayerControls()
+    {
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        //float mouselistener = Input.GetAxis("Fire1");
- 
-
-        GetComponent<Rigidbody2D>().velocity = new Vector2(moveHorizontal,moveVertical)*PL_speed;
-
-        if (Input.GetButton("Fire1") && Time.time > nextfire)
-        {
-            nextfire = Time.time + fireRate;
-            Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
-        }
+        velocity.Set(moveHorizontal * PL_speed, moveVertical * PL_speed);
+        GetComponent<Rigidbody2D>().velocity = velocity;
 
     }
 
