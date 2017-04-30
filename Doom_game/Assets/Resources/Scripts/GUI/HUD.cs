@@ -36,6 +36,7 @@ public class HUD : MonoBehaviour
         shellsText.text = player.Ammo[AmmoType.Shell].ToString();
         rocketText.text = player.Ammo[AmmoType.Rocket].ToString();
         cellsText.text = player.Ammo[AmmoType.Cell].ToString();
+        currentWeaponImage.sprite = player.activeWeapon.Sprite;
     }
 
     void OnWeaponSwitch(Weapon weapon)

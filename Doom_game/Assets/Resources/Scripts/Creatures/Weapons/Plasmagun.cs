@@ -6,6 +6,7 @@ public class Plasmagun : Weapon
 {
     public Plasmagun()
     {
+        Type = WeaponType.Plasmagun;
         Ammo = WeaponConfig.Instance.plasmagun.ammoType;
         AmmoPerShot = WeaponConfig.Instance.plasmagun.ammoPerShot;
         MinDamage = WeaponConfig.Instance.plasmagun.minDamage;

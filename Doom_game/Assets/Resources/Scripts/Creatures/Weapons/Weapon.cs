@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Weapon
 {
+    public WeaponType Type { get; protected set; }
     public AmmoType Ammo { get; protected set; }
     public int AmmoPerShot { get; protected set; }
     

@@ -6,6 +6,7 @@ public class BFG : Weapon
 {
     public BFG()
     {
+        Type = WeaponType.BGF;
         Ammo = WeaponConfig.Instance.bfg.ammoType;
         AmmoPerShot = WeaponConfig.Instance.bfg.ammoPerShot;
         MinDamage = WeaponConfig.Instance.bfg.minDamage;

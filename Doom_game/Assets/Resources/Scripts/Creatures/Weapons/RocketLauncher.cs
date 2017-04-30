@@ -6,6 +6,7 @@ public class RocketLauncher : Weapon
 {
     public RocketLauncher()
     {
+        Type = WeaponType.RocketLauncher;
         Ammo = WeaponConfig.Instance.rocket.ammoType;
         AmmoPerShot = WeaponConfig.Instance.rocket.ammoPerShot;
         MinDamage = WeaponConfig.Instance.rocket.minDamage;

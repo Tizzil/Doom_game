@@ -28,9 +28,10 @@ public class Player : MonoBehaviour
     public int Money { get; private set; }
     public Dictionary<AmmoType, int> Ammo { get; private set; }
 
+    public Weapon activeWeapon { get; private set; }
     public Dictionary<WeaponType, Weapon> Weapons { get; private set; } 
 
-    Weapon activeWeapon;
+    
 
     float speed;
     Vector2 velocity;
@@ -77,6 +78,7 @@ public class Player : MonoBehaviour
             Weapons[(WeaponType)i] = null;
         }
         Weapons[WeaponType.Pistol] = new Pistol();
+        activeWeapon = Weapons[WeaponType.Pistol];
         TestGiveAllWeapons();
 
         if (OnStartEvent != null)
@@ -96,8 +98,30 @@ public class Player : MonoBehaviour
         velocity.Set(moveHorizontal * speed, moveVertical * speed);
         GetComponent<Rigidbody2D>().velocity = velocity;
 
+        // weapon switch mouse wheel
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+        if (mouseWheel > 0)
+        {
+            if (activeWeapon.Type == WeaponType.BGF)
+            {
+                SwitchWeapon(WeaponType.Pistol);
+                return;
+            }
 
+            SwitchWeapon(activeWeapon.Type + 1);
+        }
+        else if (mouseWheel < 0)
+        {
+            if (activeWeapon.Type == WeaponType.Pistol)
+            {
+                SwitchWeapon(WeaponType.BGF);
+                return;
+            }
+
+            SwitchWeapon(activeWeapon.Type - 1);
+        }
+
+        // weapon switch keys
         for (int i = (int)WeaponType.Pistol; i <= (int)WeaponType.BGF; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 + i))

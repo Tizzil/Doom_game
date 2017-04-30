@@ -7,6 +7,7 @@ public class Pistol : Weapon
 {
     public Pistol()
     {
+        Type = WeaponType.Pistol;
         Ammo = WeaponConfig.Instance.pistol.ammoType;
         AmmoPerShot = WeaponConfig.Instance.pistol.ammoPerShot;
         MinDamage = WeaponConfig.Instance.pistol.minDamage;

@@ -6,6 +6,7 @@ public class Chaingun : Weapon
 {
     public Chaingun()
     {
+        Type = WeaponType.Chaingun;
         Ammo = WeaponConfig.Instance.chaingun.ammoType;
         AmmoPerShot = WeaponConfig.Instance.chaingun.ammoPerShot;
         MinDamage = WeaponConfig.Instance.chaingun.minDamage;
