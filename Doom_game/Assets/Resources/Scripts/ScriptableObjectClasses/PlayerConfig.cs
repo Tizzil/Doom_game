@@ -13,7 +13,7 @@ public class PlayerConfig : ScriptableObject
         get
         {
             if (instance == null)
-                instance = Resources.Load<PlayerConfig>("PlayerConfig");
+                instance = Resources.Load<PlayerConfig>("Configs/PlayerConfig");
 
             return instance;
         }
@@ -22,6 +22,7 @@ public class PlayerConfig : ScriptableObject
     // player config
     public int MaxHP;
     public int MaxArmor;
+    public int StartArmor;
     public float Speed;
 
     public int StartBullets;
