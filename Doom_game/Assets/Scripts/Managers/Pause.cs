@@ -9,28 +9,31 @@ public class Pause : MonoBehaviour {
     public GameObject opt;
     public GameObject game;
 
-    void Update () {
-	    if(Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
+    void Update ()
+    {
+	    if(Input.GetKeyDown(KeyCode.Escape))
         {
-            isPaused = true;
-            game.SetActive(false);
-            opt.SetActive(false);
-            menu.SetActive(true);
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && isPaused == true)
-        {
-            isPaused = false;
-            game.SetActive(true);
-            opt.SetActive(false);
-            menu.SetActive(false);
+            if (isPaused == true)
+            {
+                isPaused = false;
+                game.SetActive(true);
+                opt.SetActive(false);
+                menu.SetActive(false);
+            }
+            else
+            {
+                isPaused = true;
+                game.SetActive(false);
+                opt.SetActive(false);
+                menu.SetActive(true);
+            }
         }
 
         if(isPaused == true)
         {
             Time.timeScale = 0;
         }
-        else if(isPaused == false)
+        else
         {
             Time.timeScale = 1;
         }

@@ -19,7 +19,8 @@ public class Weapon
 	public static string BFG1       = "BFG1";
 }
 */
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     public GameObject player;
     public Transform shotSpawn;
@@ -38,6 +39,22 @@ public class Player : MonoBehaviour {
     public int PL_shel;
     public int PL_rckt;
     public int PL_plsm;
+
+    public delegate void Callback();
+    public static event Callback OnPlayerActivated;
+    public static event Callback OnPlayerDeactivated;
+
+    void OnEnable()
+    {
+        if (OnPlayerActivated != null)
+            OnPlayerActivated();
+    }
+
+    void OnDisable()
+    {
+        if (OnPlayerDeactivated != null)
+            OnPlayerDeactivated();
+    }
 
     public void Start()
     {
