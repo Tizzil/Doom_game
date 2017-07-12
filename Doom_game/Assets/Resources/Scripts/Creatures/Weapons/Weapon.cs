@@ -17,7 +17,7 @@ public class Weapon
 
     public Sprite Sprite { get; protected set; }
 
-    public virtual bool Shot()
+    public bool CanShot()
     {
         var now = DateTime.UtcNow;
         var timeFromLastShot = now.Subtract(LastShotTS);
@@ -26,4 +26,10 @@ public class Weapon
 
         return true;
     }
+
+    public virtual void Shot()
+    {
+        
+    }
+
 }

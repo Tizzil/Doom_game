@@ -14,4 +14,5 @@ public class SuperShotgun : Weapon
         ShotDelay = WeaponConfig.Instance.superShotgun.GetShotDelay();
         Sprite = WeaponConfig.Instance.superShotgun.sprite;
     }
+
 }

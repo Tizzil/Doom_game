@@ -29,11 +29,18 @@ public class Player : MonoBehaviour
     public Dictionary<AmmoType, int> Ammo { get; private set; }
 
     public Weapon activeWeapon { get; private set; }
-    public Dictionary<WeaponType, Weapon> Weapons { get; private set; } 
+    public Dictionary<WeaponType, Weapon> Weapons { get; private set; }
 
-    
+
 
     float speed;
+
+    [Header("border")]
+
+    public float xMin, xMax, yMin, yMax;
+
+    [Space()]
+
     Vector2 velocity;
 
     public delegate void Callback();
@@ -98,6 +105,13 @@ public class Player : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         velocity.Set(moveHorizontal * speed, moveVertical * speed);
         GetComponent<Rigidbody2D>().velocity = velocity;
+        GetComponent<Rigidbody2D>().position = new Vector2
+            (
+            Mathf.Clamp(GetComponent<Rigidbody2D>().position.x, xMin, xMax),
+            Mathf.Clamp(GetComponent<Rigidbody2D>().position.y, yMin, yMax)
+            );
+
+
 
         // weapon switch mouse wheel
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
