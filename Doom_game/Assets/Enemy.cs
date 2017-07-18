@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 
 
 
-    void FixedUpdate()
+    void Update()
     {
         EnemyLostSoulControls();
 
@@ -23,12 +23,12 @@ public class Enemy : MonoBehaviour
     {
         // пара переменных
         float 
-            enemyX = GetComponent<Transform>().position.x,
-            enemyY = GetComponent<Transform>().position.y,
+            enemyX = transform.position.x,
+            enemyY = transform.position.y,
             vectorX = 0.0f,
             vectorY = 0.0f,
-            playerX = player.GetComponent<Transform>().position.x,
-            playerY = player.GetComponent<Transform>().position.y;
+            playerX = player.transform.position.x,
+            playerY = player.transform.position.y;
         // ...
         vectorX = (playerX - enemyX);
         vectorY = (playerY - enemyY);
@@ -41,7 +41,13 @@ public class Enemy : MonoBehaviour
         vectorX *= speed;
         vectorY *= speed;
         // поехали
-        GetComponent<Transform>().position = new Vector2 (enemyX + vectorX, enemyY + vectorY);
+
+        Vector2 vector1 = new Vector2(enemyX, enemyY),
+                vector2 = new Vector2(enemyX + vectorX, enemyY + vectorY);
+
+        transform.position = Vector2.Lerp(vector1, vector2, Time.deltaTime);
+        
+            //(Mathf.Lerp(enemyX, enemyX + vectorX, 1), (Mathf.Lerp(enemyY, enemyY + vectorY, 1)));
     }
 }
 

@@ -105,11 +105,13 @@ public class Player : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         velocity.Set(moveHorizontal * speed, moveVertical * speed);
         GetComponent<Rigidbody2D>().velocity = velocity;
-        GetComponent<Rigidbody2D>().position = new Vector2
+
+
+        /*GetComponent<Rigidbody2D>().position = new Vector2
             (
             Mathf.Clamp(GetComponent<Rigidbody2D>().position.x, xMin, xMax),
             Mathf.Clamp(GetComponent<Rigidbody2D>().position.y, yMin, yMax)
-            );
+            );*/
 
 
 

@@ -33,8 +33,10 @@ public class CameraController : MonoBehaviour
     {
         if (player != null)
         {
-            cameraPos.x = player.transform.position.x;
-            cameraPos.y = player.transform.position.y;
+            //cameraPos.x = player.transform.position.x;
+            //cameraPos.y = player.transform.position.y;
+            cameraPos.x = Mathf.Lerp(cameraPos.x, player.transform.position.x, 1);
+            cameraPos.y = Mathf.Lerp(cameraPos.y, player.transform.position.y, 1);
             transform.position = cameraPos;
         }        
 	}
