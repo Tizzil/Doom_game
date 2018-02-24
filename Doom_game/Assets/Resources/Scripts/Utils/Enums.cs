@@ -10,7 +10,7 @@ public enum WeaponType
     Chaingun        = 4,
     RocketLauncher  = 5,
     Plasmagun       = 6,
-    BGF             = 7,
+    BFG             = 7,
 }
 
 public enum AmmoType

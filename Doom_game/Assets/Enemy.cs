@@ -32,20 +32,13 @@ public class Enemy : MonoBehaviour
         // ...
         vectorX = (playerX - enemyX);
         vectorY = (playerY - enemyY);
-        // модуль
-        float module = Mathf.Sqrt((Mathf.Pow(vectorX, 2)) + (Mathf.Pow(vectorY, 2)));
-        // ...
-        vectorX /= module;
-        vectorY /= module;
-        //  скорость
-        vectorX *= speed;
-        vectorY *= speed;
-        // поехали
+
+        Vector2 _vector2 = new Vector2(vectorX, vectorY).normalized;
 
         Vector2 vector1 = new Vector2(enemyX, enemyY),
                 vector2 = new Vector2(enemyX + vectorX, enemyY + vectorY);
 
-        transform.position = Vector2.Lerp(vector1, vector2, Time.deltaTime);
+        transform.Translate(_vector2);
         
             //(Mathf.Lerp(enemyX, enemyX + vectorX, 1), (Mathf.Lerp(enemyY, enemyY + vectorY, 1)));
     }

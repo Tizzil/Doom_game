@@ -15,6 +15,7 @@ namespace Internal
         public int maxDamage;
         public float delayPerShotSeconds;
         public Sprite sprite;
+        public GameObject ammo;
 
         public TimeSpan GetShotDelay()
         {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Weapon
 {
     public WeaponType Type { get; protected set; }
-    public AmmoType Ammo { get; protected set; }
+    public AmmoType AmmoType { get; protected set; }
     public int AmmoPerShot { get; protected set; }
     
     public int MinDamage { get; protected set; }
@@ -16,18 +16,24 @@ public class Weapon
     public DateTime LastShotTS { get; protected set; }
 
     public Sprite Sprite { get; protected set; }
+    public GameObject Ammo { get; protected set; }
 
     public bool CanShot()
     {
         var now = DateTime.UtcNow;
         var timeFromLastShot = now.Subtract(LastShotTS);
         if (timeFromLastShot < ShotDelay)
+        {
             return false;
-
-        return true;
+        }
+        else
+        {
+            LastShotTS = now;
+            return true;
+        }
     }
 
-    public virtual void Shot()
+    public virtual void Shot(Transform _shotspawn)
     {
         
     }

@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public int Money { get; private set; }
     public Dictionary<AmmoType, int> Ammo { get; private set; }
 
-    public Weapon activeWeapon { get; private set; }
+    public Weapon ActiveWeapon { get; private set; }
     public Dictionary<WeaponType, Weapon> Weapons { get; private set; }
 
 
@@ -74,18 +74,18 @@ public class Player : MonoBehaviour
         speed = PlayerConfig.Instance.Speed;
 
         Ammo = new Dictionary<AmmoType, int>();
-        Ammo[AmmoType.Bullet] = PlayerConfig.Instance.StartBullets;
-        Ammo[AmmoType.Shell] = 0;
-        Ammo[AmmoType.Rocket] = 0;
-        Ammo[AmmoType.Cell] = 0;
+        Ammo[AmmoType.Bullet] = 990; //PlayerConfig.Instance.StartBullets;
+        Ammo[AmmoType.Shell] = 992;
+        Ammo[AmmoType.Rocket] = 994;
+        Ammo[AmmoType.Cell] = 996;
 
         Weapons = new Dictionary<WeaponType, Weapon>();
-        for (int i = (int)WeaponType.Shotgun; i <= (int)WeaponType.BGF; i++)
+        for (int i = (int)WeaponType.Shotgun; i <= (int)WeaponType.BFG; i++)
         {
             Weapons[(WeaponType)i] = null;
         }
         Weapons[WeaponType.Pistol] = new Pistol();
-        activeWeapon = Weapons[WeaponType.Pistol];
+        ActiveWeapon = Weapons[WeaponType.Pistol];
         ///////////////////
         TestGiveAllWeapons();
         ///////////////////
@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerControls();
+        IsShooting();
     }
 
     void PlayerControls()
@@ -119,28 +120,28 @@ public class Player : MonoBehaviour
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
         if (mouseWheel > 0)
         {
-            if (activeWeapon.Type == WeaponType.BGF)
+            if (ActiveWeapon.Type == WeaponType.BFG)
             {
                 SwitchWeapon(WeaponType.Pistol);
                 return;
             }
 
 
-            SwitchWeapon(activeWeapon.Type + 1);
+            SwitchWeapon(ActiveWeapon.Type + 1);
         }
         else if (mouseWheel < 0)
         {
-            if (activeWeapon.Type == WeaponType.Pistol)
+            if (ActiveWeapon.Type == WeaponType.Pistol)
             {
-                SwitchWeapon(WeaponType.BGF);
+                SwitchWeapon(WeaponType.BFG);
                 return;
             }
 
-            SwitchWeapon(activeWeapon.Type - 1);
+            SwitchWeapon(ActiveWeapon.Type - 1);
         }
 
         // weapon switch keys
-        for (int i = (int)WeaponType.Pistol; i <= (int)WeaponType.BGF; i++)
+        for (int i = (int)WeaponType.Pistol; i <= (int)WeaponType.BFG; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 + i))
             {
@@ -153,13 +154,11 @@ public class Player : MonoBehaviour
     {
         if (Weapons[newWeapon] != null)
         {
-            activeWeapon = Weapons[newWeapon];
+            ActiveWeapon = Weapons[newWeapon];
             if (OnWeaponSwitch != null)
-                OnWeaponSwitch(activeWeapon);
+                OnWeaponSwitch(ActiveWeapon);
         }
     }
-
-
 
     void TestGiveAllWeapons()
     {
@@ -169,6 +168,23 @@ public class Player : MonoBehaviour
         Weapons[WeaponType.Chaingun] = new Chaingun();
         Weapons[WeaponType.RocketLauncher] = new RocketLauncher();
         Weapons[WeaponType.Plasmagun] = new Plasmagun();
-        Weapons[WeaponType.BGF] = new BFG();
+        Weapons[WeaponType.BFG] = new BFG();
+    }
+
+    void IsShooting()
+    {
+        //float mouse = Input.GetAxis("Fire1");
+        
+        bool isShot = (Input.GetAxis("Fire1") > 0) ;
+        
+        if (isShot && ActiveWeapon.CanShot() && (Ammo[ActiveWeapon.AmmoType] >= ActiveWeapon.AmmoPerShot))
+        {
+            Ammo[ActiveWeapon.AmmoType] -= ActiveWeapon.AmmoPerShot;
+            ActiveWeapon.Shot(shotSpawn);
+        }
+        else
+        {
+            return;
+        }
     }
 }

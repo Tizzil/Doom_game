@@ -15,6 +15,8 @@ public class HUD : MonoBehaviour
 
     public Image currentWeaponImage;
 
+    public Player player;
+
     void OnEnable()
     {
         Player.OnStartEvent += OnStart;
@@ -36,7 +38,18 @@ public class HUD : MonoBehaviour
         shellsText.text = player.Ammo[AmmoType.Shell].ToString();
         rocketText.text = player.Ammo[AmmoType.Rocket].ToString();
         cellsText.text = player.Ammo[AmmoType.Cell].ToString();
-        currentWeaponImage.sprite = player.activeWeapon.Sprite;
+        currentWeaponImage.sprite = player.ActiveWeapon.Sprite;
+    }
+
+    public void Update()
+    {
+        hpText.text = player.HP.ToString();
+        armorText.text = player.Armor.ToString();
+        moneyText.text = player.Money.ToString();
+        bulletsText.text = player.Ammo[AmmoType.Bullet].ToString();
+        shellsText.text = player.Ammo[AmmoType.Shell].ToString();
+        rocketText.text = player.Ammo[AmmoType.Rocket].ToString();
+        cellsText.text = player.Ammo[AmmoType.Cell].ToString();
     }
 
     void OnWeaponSwitch(Weapon weapon)
